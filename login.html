@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="login.css">
+    <title>DIMATALING TOURIST SPOTS</title>
+</head>
+<body>
+    <!--HEADER SECTION-->
+    <header class="header">
+        <div class="logo">DIMATALING TOURIST SPOTS</div>
+    </header>
+
+
+    <!-- Login Form -->
+  <div class="form-container">
+    <form id="loginForm">
+      <h2>LOGIN HERE</h2>
+      <div class="input-field">
+        <input type="email" id="loginEmail" required />
+        <label>Enter your email</label>
+      </div>
+      <div class="input-field">
+        <input type="password" id="loginPassword" required />
+        <label>Enter your password</label>
+      </div>
+      <button type="submit">Login</button>
+      <div class="register">
+        <p>Don't have an account? <a href="register.html">Register</a></p>
+      </div>
+    </form>
+  </div>
+
+  <script src="login.js"></script> <!-- Link to the JavaScript file -->
+  <script>
+    function showLoginPopup() {
+      const popup = document.getElementById("popup");
+      popup.style.display = "block";
+
+      setTimeout(() => {
+        popup.classList.add("hide");
+      }, 1800); // Start hiding after 1.8s
+
+      setTimeout(() => {
+        popup.style.display = "none";
+        popup.classList.remove("hide");
+        window.location.href = "index.html";
+      }, 2500); // Redirect after animation ends
+    }
+
+    // Handle form login
+    document.getElementById("loginForm").addEventListener("submit", function (event) {
+      event.preventDefault();
+      const email = document.getElementById("loginEmail").value;
+      const password = document.getElementById("loginPassword").value;
+      const accounts = JSON.parse(localStorage.getItem("accounts")) || [];
+
+      const user = accounts.find(account => account.email === email && account.password === password);
+
+      if (user) {
+        localStorage.setItem("email", email);
+        showLoginPopup();
+      } else {
+        alert("Invalid email or password. Please try again.");
+      }
+    });
+  </script>
+</body>
+</html>

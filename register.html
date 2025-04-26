@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="register.css">
+    <title>ZDSPGC DIMATALING YEARBOOK</title>
+</head>
+<body>
+    <!--HEADER SECTION-->
+    <header class="header">
+        <div class="logo">DIMATALING TOURIST SPOTS</div>
+    </header>
+
+    <!-- Registration Form -->
+  <div class="form-container">
+    <form id="registerForm">
+      <h2>REGISTER HERE</h2>
+      <div class="input-field">
+        <input type="text" id="username" required />
+        <label>Enter your username</label>
+      </div>
+      <div class="input-field">
+        <input type="email" id="email" required />
+        <label>Enter your email</label>
+      </div>
+      <div class="input-field">
+        <input type="password" id="password" required />
+        <label>Enter your password</label>
+      </div>
+      <button type="submit">Register</button>
+      <div class="register">
+        <p>Already have an account? <a href="login.html">Login</a></p>
+      </div>
+    </form>
+  </div>
+
+
+  <script src="register.js"></script> <!-- Link to the JavaScript file -->
+  <script>
+    function showLoginPopup() {
+      const popup = document.getElementById("popup");
+      popup.style.display = "block";
+
+      setTimeout(() => {
+        popup.classList.add("hide");
+      }, 1800); // Start hiding after 1.8s
+
+      setTimeout(() => {
+        popup.style.display = "none";
+        popup.classList.remove("hide");
+        window.location.href = "index.html";
+      }, 2500); // Redirect after animation ends
+    }
+
+    // Handle form login
+    document.getElementById("loginForm").addEventListener("submit", function (event) {
+      event.preventDefault();
+      const email = document.getElementById("loginEmail").value;
+      const password = document.getElementById("loginPassword").value;
+      const accounts = JSON.parse(localStorage.getItem("accounts")) || [];
+
+      const user = accounts.find(account => account.email === email && account.password === password);
+
+      if (user) {
+        localStorage.setItem("email", email);
+        showLoginPopup();
+      } else {
+        alert("Invalid email or password. Please try again.");
+      }
+    });
+  </script>
+</body>
+</html>
